@@ -68,7 +68,7 @@ def main(args):
     log_string('PARAMETER ...')
     log_string(args)
 
-    root = 'pn/'
+    root = './data/pn/'
 
     TEST_DATASET = PartNormalDataset(root = root, npoints=args.num_point, split='test', normal_channel=args.normal)
     testDataLoader = torch.utils.data.DataLoader(TEST_DATASET, batch_size=args.batch_size,shuffle=False, num_workers=4)

@@ -91,7 +91,7 @@ def main(args):
     log_string('PARAMETER ...')
     log_string(args)
 
-    root = 'pn/'
+    root = './data/pn/'
 
     transforms = torchvision.transforms.Compose(
         [

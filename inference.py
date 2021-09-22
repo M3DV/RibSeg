@@ -56,7 +56,7 @@ def main(args):
     checkpoint = torch.load(str(experiment_dir) + '/checkpoints/best_model.pth')
     classifier.load_state_dict(checkpoint['model_state_dict'])
 
-    data_list = tqdm([x for x in os.listdir('./pn/data_pn/test/')])
+    data_list = tqdm([x for x in os.listdir('./data/pn/data_pn/test/')])
     
 
     with torch.no_grad():
@@ -65,8 +65,8 @@ def main(args):
         ave_dice=torch.tensor(0).float().cuda()
         for ct in data_list:
             num+=1
-            data = np.load('./pn/data_pn/test/'+ct).astype(np.float32)
-            seg = np.load('./pn/label_pn/test/'+ct).astype(np.int32)
+            data = np.load('./data/pn/data_pn/test/'+ct).astype(np.float32)
+            seg = np.load('./data/pn/label_pn/test/'+ct).astype(np.int32)
             seg[seg!=0]=1
 
             points = data[:, 0:3]
@@ -74,12 +74,8 @@ def main(args):
             # resample
             points = points[choice, :]
             seg = seg[choice]
-            np.save('./miccai_test/c2_3w_aug/point/'+ct,points.astype('int32'))
-            # np.save('./display/cls25_aug_2loss/point/'+ct,points.astype('int8'))
-            # np.save('./display/c2/point/'+ct,points.astype('int32'))
-            # np.save('./display/c2_a/25w/point/'+ct,points.astype('int32'))
-            
-            
+            np.save('./inference_res/point/'+ct,points.astype('int32'))
+
             points[:, 0:3] = pc_normalize(points[:, 0:3])
 
             label = np.array([0])
@@ -88,7 +84,6 @@ def main(args):
             label = np.expand_dims(label, 0)
             
             points, label,seg = torch.from_numpy(points).float().cuda(), torch.from_numpy(label).long().cuda(),torch.from_numpy(seg).long().cuda()
-            # # print(points,points.shape)
             points = points.transpose(2, 1)
 
             t1=time.clock()
@@ -100,8 +95,6 @@ def main(args):
             seg_pred = seg_pred.contiguous().view(-1, num_part)
             pred_choice = seg_pred.data.max(1)[1]
 
-            
-            
             ## dice
             intersection = pred_choice.mul(seg)
             
@@ -112,28 +105,9 @@ def main(args):
             ave_dice=torch.add(ave_dice,dice)
             
             ####################################
-            
-            
-            # tmp = torch.zeros(seg_pred.shape)
-            # for i in range(seg_pred.shape[0]):
-            #   tmp[i][target[i]]=1
-            # # print('pred',pred,pred.size())
-            # # print('target',target.size())
-            # # print('tmp',tmp,tmp.size())
-            # tmp=tmp.long().cuda()
-            # intersection = tmp.mul(seg_pred)
-            # # print('intersection',intersection,intersection.size())
-            # i_s = torch.sum(intersection)
-            # p_s = torch.sum(pred)
-            # t_s = torch.sum(tmp)
-            # dice = 1- (2*(i_s)+1)/(p_s+t_s+1)
-
-
-
 
             pred_choice=pred_choice.cpu().numpy()
-            # np.save('./miccai_test/c2_3w_aug/label/'+ct,pred_choice.astype('int8'))
-            # np.save('./r2/label/'+ct,pred_choice.astype('int8'))
+            np.save('./inference_res/label/'+ct,pred_choice.astype('int8'))
         time_cost/=num
         ave_dice/=num
         print('average time:',time_cost)

@@ -14,7 +14,7 @@ def pc_normalize(pc):
     return pc
 
 class PartNormalDataset(Dataset):
-    def __init__(self,root = './pn', npoints=30000, split='train', transforms=None,class_choice=None, normal_channel=False):
+    def __init__(self,root = './data/pn', npoints=30000, split='train', transforms=None,class_choice=None, normal_channel=False):
         self.npoints = npoints
         self.root = root
         self.transforms = transforms
@@ -31,17 +31,17 @@ class PartNormalDataset(Dataset):
 
         # print(fns[0][0:-4])
         if split == 'trainval':
-            fns = ['./pn/data_pn/train/'+fn for fn in train_ids]+['./pn/data_pn/val/'+fn for fn in val_ids]
-            fns_l=  ['./pn/label_pn/train/'+fn for fn in train_ids]+['./pn/label_pn/val/'+fn for fn in val_ids]
+            fns = ['./data/pn/data_pn/train/'+fn for fn in train_ids]+['./data/pn/data_pn/val/'+fn for fn in val_ids]
+            fns_l=  ['./data/pn/label_pn/train/'+fn for fn in train_ids]+['./data/pn/label_pn/val/'+fn for fn in val_ids]
         elif split == 'train':
-            fns = ['./pn/data_pn/train/'+fn for fn in train_ids]
-            fns_l = ['./pn/label_pn/train/' + fn for fn in train_ids]
+            fns = ['./data/pn/data_pn/train/'+fn for fn in train_ids]
+            fns_l = ['./data/pn/label_pn/train/' + fn for fn in train_ids]
         elif split == 'val':
-            fns = ['./pn/data_pn/val/'+fn for fn in val_ids]
-            fns_l = ['./pn/label_pn/val/' + fn for fn in val_ids]
+            fns = ['./data/pn/data_pn/val/'+fn for fn in val_ids]
+            fns_l = ['./data/pn/label_pn/val/' + fn for fn in val_ids]
         elif split == 'test':
-            fns = ['./pn/data_pn/test/'+fn for fn in test_ids]
-            fns_l = ['./pn/label_pn/test/' + fn for fn in test_ids]
+            fns = ['./data/pn/data_pn/test/'+fn for fn in test_ids]
+            fns_l = ['./data/pn/label_pn/test/' + fn for fn in test_ids]
         else:
             fns=[]
             fns_l=[]
