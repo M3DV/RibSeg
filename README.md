@@ -72,3 +72,9 @@ You can run our model through the following command line:
 python inference.py --log_dir c2
 ```
 
+You can get the volume-wise test result through the following command line:
+
+```
+python post_proc
+```
+

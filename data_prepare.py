@@ -29,8 +29,8 @@ def main():
         for i in points:
             label.append(label[i[0]][i[1]][i[2]])
         temp = np.array(temp)
-        np.save('./data/pn/data_pn/train'+data[:-12], points)
-        np.save('./data/pn/label_pn/train' + data[:-12], temp)
+        np.save('./data/pn/data_pn/train'+data[:-13], points)
+        np.save('./data/pn/label_pn/train' + data[:-13], temp)
 
     for data in [x for x in os.listdir('./data/ribfrac/ribfrac-train-images-2/Part2/')]:
         source = nib.load('./data/ribfrac/ribfrac-train-images-2/Part2/'+data)
@@ -50,8 +50,8 @@ def main():
         for i in points:
             label.append(label[i[0]][i[1]][i[2]])
         temp = np.array(temp)
-        np.save('./data/pn/data_pn/train'+data[:-12], points)
-        np.save('./data/pn/label_pn/train' + data[:-12], temp)
+        np.save('./data/pn/data_pn/train'+data[:-13], points)
+        np.save('./data/pn/label_pn/train' + data[:-13], temp)
 
     for data in [x for x in os.listdir('./data/ribfrac/ribfrac-val-images/')]:
         source = nib.load('./ribfrac/ribfrac-val-images/' + data)
@@ -71,8 +71,8 @@ def main():
         for i in points:
             label.append(label[i[0]][i[1]][i[2]])
         temp = np.array(temp)
-        np.save('./data/pn/data_pn/val' + data[:-12], points)
-        np.save('./data/pn/label_pn/val' + data[:-12], temp)
+        np.save('./data/pn/data_pn/val' + data[:-13], points)
+        np.save('./data/pn/label_pn/val' + data[:-13], temp)
 
     for data in [x for x in os.listdir('./data/ribfrac/ribfrac-test-images/')]:
         source = nib.load('./data/ribfrac/ribfrac-test-images/'+data)
@@ -92,8 +92,8 @@ def main():
         for i in points:
             label.append(label[i[0]][i[1]][i[2]])
         temp = np.array(temp)
-        np.save('./data/pn/data_pn/test'+data[:-12], points)
-        np.save('./data/pn/label_pn/test' + data[:-12], temp)
+        np.save('./data/pn/data_pn/test'+data[:-13], points)
+        np.save('./data/pn/label_pn/test' + data[:-13], temp)
 
 if __name__ == '__main__':
     main()

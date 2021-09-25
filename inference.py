@@ -107,7 +107,7 @@ def main(args):
             ####################################
 
             pred_choice=pred_choice.cpu().numpy()
-            np.save('./inference_res/label/'+ct,pred_choice.astype('int8'))
+            np.save('./inference_res/label/'+ct[:-4],pred_choice.astype('int8'))
         time_cost/=num
         ave_dice/=num
         print('average time:',time_cost)
