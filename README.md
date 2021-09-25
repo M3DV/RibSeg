@@ -8,7 +8,7 @@ Manual rib inspections in computed tomography (CT) scans are clinically critical
 
 The RibSeg Dataset contains annotations for both rib segmentation and centerline.
 
-<img src="D:\MICCAI\RibSeg\readme_pic\10_s.png" style="zoom:33%;" /><img src="D:\MICCAI\RibSeg\readme_pic\10_c.png" style="zoom:33%;" />
+<img src=".\readme_pic\10_s.png" style="zoom:20%;" /><img src=".\readme_pic\10_c.png" style="zoom:20%;" />
 
 Over view of RibSeg dataset:
 
