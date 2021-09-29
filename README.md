@@ -74,13 +74,15 @@ python post_proc.py
 # Citation
 If you find this project useful, please cite our paper as:
 
-    Jiancheng Yang, Shixuan Gu, Donglai Wei, Hanspeter Pfister, Bingbing Ni. "RibSeg Dataset and Strong Point Cloud Baselines for Rib Segmentation from CT Scans". arXiv preprint arXiv:2109.09521, 2021.
+    Jiancheng Yang, Shixuan Gu, Donglai Wei, Hanspeter Pfister, Bingbing Ni. "RibSeg Dataset and Strong Point Cloud Baselines for Rib Segmentation from CT Scans". International Conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI), 2021.
 
 or using bibtex:
 
-    @article{yang2021ribseg,
+    @inproceedings{yang2021ribseg,
       title={RibSeg Dataset and Strong Point Cloud Baselines for Rib Segmentation from CT Scans},
       author={Yang, Jiancheng and Gu, Shixuan and Wei, Donglai and Pfister, Hanspeter and Ni, Bingbing},
-      journal={arXiv preprint arXiv:2109.09521},
-      year={2021}
+      booktitle={International Conference on Medical Image Computing and Computer-Assisted Intervention},
+      pages={611--621},
+      year={2021},
+      organization={Springer}
     }
