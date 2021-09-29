@@ -81,7 +81,7 @@ or using bibtex:
     @inproceedings{yang2021ribseg,
       title={RibSeg Dataset and Strong Point Cloud Baselines for Rib Segmentation from CT Scans},
       author={Yang, Jiancheng and Gu, Shixuan and Wei, Donglai and Pfister, Hanspeter and Ni, Bingbing},
-      booktitle={International Conference on Medical Image Computing and Computer-Assisted Intervention},
+      booktitle={International Conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI)},
       pages={611--621},
       year={2021},
       organization={Springer}
