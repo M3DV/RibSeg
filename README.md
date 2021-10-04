@@ -1,6 +1,7 @@
 # RibSeg
+## Paper ([MICCAI'21](http://arxiv.org/abs/2109.09521)) | Dataset ([Zenodo](https://doi.org/10.5281/zenodo.5336592))
+[Jiancheng Yang](https://jiancheng-yang.com/), [Shixuan Gu](https://github.com/Clarence-gsx), [Donglai Wei](https://donglaiw.github.io/), [Hanspeter Pfister](https://scholar.google.com/citations?user=VWX-GMAAAAAJ&hl=en), [Bingbing Ni](https://scholar.google.com/citations?user=eUbmKwYAAAAJ)
 
-## Intro
 
 Manual rib inspections in computed tomography (CT) scans are clinically critical but labor-intensive, as 24 ribs are typically elongated and oblique in 3D volumes. Automatic rib segmentation methods can speed up the process through rib measurement and visualization. However, prior arts mostly use in-house labeled datasets that are publicly unavailable and work on dense 3D volumes that are computationally inefficient. To address these issues, we develop a labeled rib segmentation benchmark, named RibSeg, including 490 CT scans (11,719 individual ribs) from a public dataset. For ground truth generation, we used existing morphology-based algorithms and manually refined its results. Then, considering the sparsity of ribs in 3D volumes, we thresholded and sampled sparse voxels from the input and designed a point cloud-based baseline method for rib segmentation. The proposed method achieves state-of-the-art segmentation performance (Dice≈95%≈95%) with significant efficiency (10∼40×10∼40× faster than prior arts). 
 
@@ -8,9 +9,11 @@ Manual rib inspections in computed tomography (CT) scans are clinically critical
 
 The RibSeg Dataset contains annotations for both rib segmentation and centerline.
 
-<img src=".\readme_pic\10_s.png" style="zoom:20%;" /><img src=".\readme_pic\10_c.png" style="zoom:20%;" />
+| Rib Segmentation      | Rib Centerline |
+| ----------- | --------------- | 
+| ![Rib Segmentation](readme_pic/10_s.png)     | ![Rib Centerline](readme_pic/10_c.png)             | 
 
-Over view of RibSeg dataset:
+Overview of RibSeg dataset:
 
 | Subset      | No. of CT Scans | No. of Individual Ribs |
 | ----------- | --------------- | ---------------------- |
@@ -24,21 +27,11 @@ Over view of RibSeg dataset:
 
 For training data, please download the source CT scans from RibFrac Dataset to **./data/ribfrac** directory:
 
-### RibFrac Dataset:
+### Download
 
-training set part1: https://zenodo.org/record/3893508#.YUtisbj0kac 
+For the source CT scans, please refer to the MICCAI 2020 RibFrac Challenge on [grand-challenge.org](https://ribfrac.grand-challenge.org/) (click `Join` first). 
 
-training set part2: https://zenodo.org/record/3893498#.YUti2bj0kac
-
-test set: https://zenodo.org/record/3993380#.YUti67j0kac
-
-validation set: https://zenodo.org/record/3893496#.YUtjCLj0kac
-
-### RibSeg Dataset
-
-For annotations, download RibSeg dataset to **./data/ribseg** directory
-
-please refer to https://zenodo.org/record/5336592#.YUtkIbj0kac
+For annotations, please download RibSeg dataset to **./data/ribseg** directory on [Zenodo](https://doi.org/10.5281/zenodo.5336592).
 
 ### Data Preparation
 
@@ -75,6 +68,21 @@ python inference.py --log_dir c2
 You can get the volume-wise test result through the following command line:
 
 ```
-python post_proc
+python post_proc.py
 ```
 
+# Citation
+If you find this project useful, please cite our paper as:
+
+    Jiancheng Yang, Shixuan Gu, Donglai Wei, Hanspeter Pfister, Bingbing Ni. "RibSeg Dataset and Strong Point Cloud Baselines for Rib Segmentation from CT Scans". International Conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI), 2021.
+
+or using bibtex:
+
+    @inproceedings{yang2021ribseg,
+      title={RibSeg Dataset and Strong Point Cloud Baselines for Rib Segmentation from CT Scans},
+      author={Yang, Jiancheng and Gu, Shixuan and Wei, Donglai and Pfister, Hanspeter and Ni, Bingbing},
+      booktitle={International Conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI)},
+      pages={611--621},
+      year={2021},
+      organization={Springer}
+    }
