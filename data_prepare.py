@@ -21,15 +21,15 @@ def main():
         label = label.get_fdata()
 
         temp = np.argwhere(source == 1)
-        choice = np.random.choice(temp.shape[0], 30000, replace=False)
-        # downsample
-        points = temp[choice, :]
+#         choice = np.random.choice(temp.shape[0], 30000, replace=False)
+##         downsample
+#         points = temp[choice, :]
 
         label_selected_points = []
         for i in points:
             label_selected_points.append(label[i[0]][i[1]][i[2]])
         label_selected_points = np.array(label_selected_points)
-        np.save('./data/pn/data_pn/train'+data[:-13], points)
+        np.save('./data/pn/data_pn/train'+data[:-13], temp)
         np.save('./data/pn/label_pn/train' + data[:-13], label_selected_points)
 
 
@@ -43,15 +43,15 @@ def main():
         label = label.get_fdata()
 
         temp = np.argwhere(source == 1)
-        choice = np.random.choice(temp.shape[0], 30000, replace=False)
-        # downsample
-        points = temp[choice, :]
+#         choice = np.random.choice(temp.shape[0], 30000, replace=False)
+#         # downsample
+#         points = temp[choice, :]
 
         label_selected_points = []
         for i in points:
             label_selected_points.append(label[i[0]][i[1]][i[2]])
         label_selected_points = np.array(label_selected_points)
-        np.save('./data/pn/data_pn/train'+data[:-13], points)
+        np.save('./data/pn/data_pn/train'+data[:-13], temp)
         np.save('./data/pn/label_pn/train' + data[:-13], label_selected_points)
 
 
@@ -65,15 +65,15 @@ def main():
         label = label.get_fdata()
 
         temp = np.argwhere(source == 1)
-        choice = np.random.choice(temp.shape[0], 30000, replace=False)
-        # downsample
-        points = temp[choice, :]
+#         choice = np.random.choice(temp.shape[0], 30000, replace=False)
+#         # downsample
+#         points = temp[choice, :]
 
         label_selected_points = []
         for i in points:
             label_selected_points.append(label[i[0]][i[1]][i[2]])
         label_selected_points = np.array(label_selected_points)
-        np.save('./data/pn/data_pn/val' + data[:-13], points)
+        np.save('./data/pn/data_pn/val' + data[:-13], temp)
         np.save('./data/pn/label_pn/val' + data[:-13], label_selected_points)
 
 
@@ -87,15 +87,15 @@ def main():
         label = label.get_fdata()
 
         temp = np.argwhere(source == 1)
-        choice = np.random.choice(temp.shape[0], 30000, replace=False)
-        # downsample
-        points = temp[choice, :]
+#         choice = np.random.choice(temp.shape[0], 30000, replace=False)
+#         # downsample
+#         points = temp[choice, :]
 
         label_selected_points = []
         for i in points:
             label_selected_points.append(label[i[0]][i[1]][i[2]])
         temp = np.array(temp)
-        np.save('./data/pn/data_pn/test'+data[:-13], points)
+        np.save('./data/pn/data_pn/test'+data[:-13], temp)
         np.save('./data/pn/label_pn/test' + data[:-13], label_selected_points)
 
 if __name__ == '__main__':
