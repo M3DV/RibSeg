@@ -23,7 +23,13 @@ ROOT_DIR = BASE_DIR
 sys.path.append(os.path.join(ROOT_DIR, 'models'))
 
 
-seg_classes = {'rib':[0,1]}
+# seg_classes = {'rib':[0,1]}
+seg_classes = {'rib':[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24],'Earphone': [44, 45], 'Motorbike': [30, 31, 32, 33, 34, 35], 'Rocket': [41, 42, 43],
+                            'Car': [29], 'Laptop': [28 ], 'Cap': [26], 'Skateboard': [46],
+                            'Mug': [36], 'Guitar': [39, 40], 'Bag': [27], 'Lamp': [25],
+                            'Table': [47], 'Airplane': [48], 'Pistol': [38],
+                            'Chair': [37], 'Knife': [49]}
+
 
 seg_label_to_cat = {} # {0:Airplane, 1:Airplane, ...49:Table}
 for cat in seg_classes.keys():
@@ -109,8 +115,8 @@ def main(args):
     testDataLoader = torch.utils.data.DataLoader(TEST_DATASET, batch_size=args.batch_size,shuffle=False, num_workers=0)
     log_string("The number of training data is: %d" % len(TRAIN_DATASET))
     log_string("The number of test data is: %d" %  len(TEST_DATASET))
-    num_classes = 1
-    num_part = 2
+    num_classes = 16 #1
+    num_part = 50 #2
     '''MODEL LOADING'''
     MODEL = importlib.import_module(args.model)
     shutil.copy('models/%s.py' % args.model, str(experiment_dir))
