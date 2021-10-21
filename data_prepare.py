@@ -26,7 +26,7 @@ def main():
 #         points = temp[choice, :]
 
         label_selected_points = []
-        for i in points:
+        for i in temp:
             label_selected_points.append(label[i[0]][i[1]][i[2]])
         label_selected_points = np.array(label_selected_points)
         np.save('./data/pn/data_pn/train'+data[:-13], temp)
@@ -48,7 +48,7 @@ def main():
 #         points = temp[choice, :]
 
         label_selected_points = []
-        for i in points:
+        for i in temp:
             label_selected_points.append(label[i[0]][i[1]][i[2]])
         label_selected_points = np.array(label_selected_points)
         np.save('./data/pn/data_pn/train'+data[:-13], temp)
@@ -70,7 +70,7 @@ def main():
 #         points = temp[choice, :]
 
         label_selected_points = []
-        for i in points:
+        for i in temp:
             label_selected_points.append(label[i[0]][i[1]][i[2]])
         label_selected_points = np.array(label_selected_points)
         np.save('./data/pn/data_pn/val' + data[:-13], temp)
@@ -92,7 +92,7 @@ def main():
 #         points = temp[choice, :]
 
         label_selected_points = []
-        for i in points:
+        for i in temp:
             label_selected_points.append(label[i[0]][i[1]][i[2]])
         temp = np.array(temp)
         np.save('./data/pn/data_pn/test'+data[:-13], temp)
