@@ -24,6 +24,10 @@ sys.path.append(os.path.join(ROOT_DIR, 'models'))
 
 
 # seg_classes = {'rib':[0,1]}
+# we adapted the PointNet++ code from https://github.com/yanx27/Pointnet_Pointnet2_pytorch.git, 
+# to keep the consistency, we simply let the number of classes be the same as the source code.
+# For experiments, the only classes used will be 'rib': 0 ,1.
+
 seg_classes = {'rib':[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24],'Earphone': [44, 45], 'Motorbike': [30, 31, 32, 33, 34, 35], 'Rocket': [41, 42, 43],
                             'Car': [29], 'Laptop': [28 ], 'Cap': [26], 'Skateboard': [46],
                             'Mug': [36], 'Guitar': [39, 40], 'Bag': [27], 'Lamp': [25],
