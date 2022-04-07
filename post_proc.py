@@ -53,7 +53,8 @@ for ct in name_list:
 
     lmage_array = sitk.GetImageFromArray(mask_res.astype('int8'))
     # closed = sitk.BinaryMorphologicalClosing(lmage_array,15,sitk.sitkBall)
-    dilated = sitk.BinaryDilate(lmage_array, 3, sitk.sitkBall)
+    # You should try different parameters for better results.
+    dilated = sitk.BinaryDilate(lmage_array, (3,3,3), sitk.sitkBall)
     # Eroded = sitk.BinaryErode(dilated,12,sitk.sitkBall)
     # holesfilled = sitk.BinaryFillhole(dilated,fullyConnected=True)
     holesfilled = sitk.GetArrayFromImage(dilated)
