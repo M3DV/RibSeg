@@ -1,9 +1,10 @@
 # RibSeg 
-## RibSeg v2 is coming soon, for code of RibSeg v1, please refer to the branch [ribsegv1](https://github.com/M3DV/RibSeg/tree/ribsegv1)
+
+##### RibSeg v2 is coming soon, for code of RibSeg v1, please refer to the branch [ribsegv1](https://github.com/M3DV/RibSeg/tree/ribsegv1).
 
 ## Paper ([MICCAI'21](http://arxiv.org/abs/2109.09521)) | Dataset ([Zenodo](https://doi.org/10.5281/zenodo.5336592))
 
-[Jiancheng Yang](https://jiancheng-yang.com/), [Shixuan Gu](https://github.com/Clarence-gsx), [Donglai Wei](https://donglaiw.github.io/), [Hanspeter Pfister](https://scholar.google.com/citations?user=VWX-GMAAAAAJ&hl=en), [Bingbing Ni](https://scholar.google.com/citations?user=eUbmKwYAAAAJ)
+[Jiancheng Yang](https://jiancheng-yang.com/), [Shixuan Gu](https://shixuan-gu.me/), [Donglai Wei](https://donglaiw.github.io/), [Hanspeter Pfister](https://scholar.google.com/citations?user=VWX-GMAAAAAJ&hl=en), [Bingbing Ni](https://scholar.google.com/citations?user=eUbmKwYAAAAJ)
 
 
 Manual rib inspections in computed tomography (CT) scans are clinically critical but labor-intensive, as 24 ribs are typically elongated and oblique in 3D volumes. Automatic rib segmentation methods can speed up the process through rib measurement and visualization. However, prior arts mostly use in-house labeled datasets that are publicly unavailable and work on dense 3D volumes that are computationally inefficient. To address these issues, we develop a labeled rib segmentation benchmark, named RibSeg, including 490 CT scans (11,719 individual ribs) from a public dataset. For ground truth generation, we used existing morphology-based algorithms and manually refined its results. Then, considering the sparsity of ribs in 3D volumes, we thresholded and sampled sparse voxels from the input and designed a point cloud-based baseline method for rib segmentation. The proposed method achieves state-of-the-art segmentation performance (Dice≈95%) with significant efficiency (10∼40× faster than prior arts). 
