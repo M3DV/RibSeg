@@ -1,117 +1,112 @@
-"""
-Author: Benny
-Date: Nov 2019
-"""
 import argparse
 import os
+from pickle import FALSE
+import torch.nn.functional as F
 import torch
+from data_utils.dataloader import ARPD
+import datetime
+import logging
+import time
+from pathlib import Path
 import sys
 import importlib
+import shutil
 from tqdm import tqdm
 import numpy as np
-import time
+import nibabel as nib
+
+# os.environ['CUDA_LAUNCH_BLOCKING'] = "1"
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = BASE_DIR
 sys.path.append(os.path.join(ROOT_DIR, 'models'))
 
+def pc_normalize(pc, centroid=None, m=None):
+    if centroid is None:
+        centroid = np.mean(pc, axis=0)
+    if m is None:
+        m = np.max(np.sqrt(np.sum(pc ** 2, axis=1)))
 
-def to_categorical(y, num_classes):
-    """ 1-hot encodes a tensor """
-    new_y = torch.eye(num_classes)[y.cpu().data.numpy(),]
-    if (y.is_cuda):
-        return new_y.cuda()
-    return new_y
-
-def pc_normalize(pc):
-    centroid = np.mean(pc, axis=0)
     pc = pc - centroid
-    m = np.max(np.sqrt(np.sum(pc ** 2, axis=1)))
     pc = pc / m
-    return pc
+    return pc, centroid, m
 
 def parse_args():
-    '''PARAMETERS'''
     parser = argparse.ArgumentParser('Model')
-    parser.add_argument('--gpu', type=str, default='0', help='specify gpu device [default: 0]')
-    parser.add_argument('--num_point', type=int, default=250000, help='Point Number [default: 2048]')
-    parser.add_argument('--log_dir', type=str, default='pointnet2_part_seg_msg', help='Experiment root')
-    parser.add_argument('--normal', action='store_true', default=False, help='Whether to use normal information [default: False]')
-    parser.add_argument('--num_votes', type=int, default=3, help='Aggregate segmentation scores with voting [default: 3]')
+    parser.add_argument('--model', type=str, default='CLNet', help='model name [default: CLNet]')
+    parser.add_argument('--batch_size', type=int, default=4, help='Batch Size during training [default: 16]')
+    parser.add_argument('--gpu', type=str, default='0', help='GPU to use [default: GPU 0]')
+    parser.add_argument('--log_dir', type=str, default=None, help='Log path [default: None]')
     return parser.parse_args()
+
 
 def main(args):
     '''HYPER PARAMETER'''
     os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu
-    experiment_dir = 'log/part_seg/' + args.log_dir
-
-
-    num_classes = 16
-    num_part = 50
+    experiment_dir = 'log/' + args.log_dir
 
     '''MODEL LOADING'''
-    model_name = os.listdir(experiment_dir+'/logs')[0].split('.')[0]
-    MODEL = importlib.import_module(model_name)
-    classifier = MODEL.get_model(num_part, normal_channel=args.normal).cuda()
+    cls_num = 2
+
+    MODEL = importlib.import_module(args.model)
+    classifier = MODEL.SegNet(cls_num=cls_num).cuda()
+
     checkpoint = torch.load(str(experiment_dir) + '/checkpoints/best_model.pth')
-    classifier.load_state_dict(checkpoint['model_state_dict'])
+    classifier.load_state_dict(checkpoint['model_state_dict'],strict=True)
+    arp = False
 
-    data_list = tqdm([x for x in os.listdir('./data/pn/data_pn/test/')])
-    
+    data_dir = './dataset/ribseg/test/'
 
+    dir_save = './res/'+args.log_dir+'/'
+    if not os.path.exists(dir_save):
+      os.makedirs(dir_save,exist_ok=True)
+
+    data_list = [x for x in os.listdir(data_dir)]
+    classifier = classifier.eval()
     with torch.no_grad():
-        time_cost = 0
-        num=0
-        ave_dice=torch.tensor(0).float().cuda()
-        for ct in data_list:
-            num+=1
-            data = np.load('./data/pn/data_pn/test/'+ct).astype(np.float32)
-            seg = np.load('./data/pn/label_pn/test/'+ct).astype(np.int32)
-            seg[seg!=0]=1
-
-            points = data[:, 0:3]
-            choice = np.random.choice(data.shape[0], 30000, replace=False)
-            # resample
-            points = points[choice, :]
-            seg = seg[choice]
-            np.save('./inference_res/point/'+ct,points.astype('int32'))
-
-            points[:, 0:3] = pc_normalize(points[:, 0:3])
-
-            label = np.array([0])
-
-            points = np.expand_dims(points, 0)
-            label = np.expand_dims(label, 0)
+        for name in tqdm(data_list):
+            data = np.load(data_dir+name)['ct'].astype(np.float32)
+            np.random.shuffle(data)
+            ct_cords = data.copy()
+            data[:,:3], centroid, m = pc_normalize(data[:,:3])
+            ct_source_cord,seg = data[:,:3],data[:,3]
             
-            points, label,seg = torch.from_numpy(points).float().cuda(), torch.from_numpy(label).long().cuda(),torch.from_numpy(seg).long().cuda()
-            points = points.transpose(2, 1)
+            sample_num = 30000*4
+            num_p = ct_source_cord.shape[0]//sample_num
+            data_to_do = []
+            for i in range(num_p):
+                data_to_do.append(ct_source_cord[sample_num*i:sample_num*(i+1),:])
+            data_to_do.append(ct_source_cord[-sample_num:,:])
 
-            t1=time.clock()
+            pred = np.zeros(ct_source_cord.shape[0])
 
-            classifier = classifier.eval()
-            seg_pred, trans_feat = classifier(points, to_categorical(label, num_classes))
+            for index in range(len(data_to_do)):
+                points = data_to_do[index]
+                points = points.reshape(4,-1,3).astype(np.float32)
 
-            time_cost += time.clock()-t1
-            seg_pred = seg_pred.contiguous().view(-1, num_part)
-            pred_choice = seg_pred.data.max(1)[1]
+                if arp == True:
+                  points_arp = np.zeros((4,30000,90))
+                  for i_p in range(4):
+                    choice = np.random.choice(ct_source_cord.shape[0],100000,replace=False)
+                    points_arp[i_p] = ARPD(ct_source_cord[choice],points[i_p])
 
-            ## dice
-            intersection = pred_choice.mul(seg)
+                  points = torch.from_numpy(points_arp).float().cuda()
+                else:
+                  points = torch.from_numpy(points).float().cuda()
+                points = points.transpose(2,1)
+
+                seg_pred_s = classifier(points)
+
+                seg_pred_choice = seg_pred_s.contiguous().view(-1, cls_num)
+                pred_choice = seg_pred_choice.data.max(1)[1]
+
+                if index == len(data_to_do) - 1:
+                    pred[-sample_num:] = pred_choice.cpu()
+                else:
+                    pred[index*sample_num:(1+index)*sample_num] = pred_choice.cpu()
             
-            i_s = torch.sum(intersection)
-            p_s = torch.sum(pred_choice)
-            t_s = torch.sum(seg)
-            dice = 1- (2*(i_s)+1)/(p_s+t_s+1)
-            ave_dice=torch.add(ave_dice,dice)
-            
-            ####################################
+            np.savez_compressed(dir_save+name[:-4], ct=ct_cords, seg =pred)
 
-            pred_choice=pred_choice.cpu().numpy()
-            np.save('./inference_res/label/'+ct[:-4],pred_choice.astype('int8'))
-        time_cost/=num
-        ave_dice/=num
-        print('average time:',time_cost)
-        print('average dice:',ave_dice)
 
 if __name__ == '__main__':
     args = parse_args()
