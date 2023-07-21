@@ -9,11 +9,12 @@ from pytorch3d.ops import ball_query
 def pc_normalize(pc,centroid=None,m=None):
     if centroid is None:
         centroid = np.mean(pc, axis=0)
+    pc = pc - centroid
+
     if m is None:        
         m = np.max(np.sqrt(np.sum(pc ** 2, axis=1)))        
-    
-    pc = pc - centroid
     pc = pc / m
+
     return pc, centroid ,m
 
 def ARPD(pc_full, pc_ds, npoints_abs=1000, npoints_relative = 29, radius=0.05):
