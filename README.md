@@ -1,6 +1,20 @@
 # RibSeg 
 
-##### Please see the RibSeg v2 paper  ([paper](https://arxiv.org/abs/2210.09309)) here, for code of RibSeg v1, please refer to the branch [ribsegv1](https://github.com/M3DV/RibSeg/tree/ribsegv1).
+##### Please see the RibSeg v2 [paper](https://arxiv.org/abs/2210.09309) here, for code of RibSeg v1, please refer to the branch [ribsegv1](https://github.com/M3DV/RibSeg/tree/ribsegv1).
+
+#### Pre-Released! Welcome to use and leave comments! Please cite [RibSeg v2](https://arxiv.org/abs/2210.09309)!
+
+##### Pre-released RibSeg v2 [dataset](https://drive.google.com/file/d/1ZZGGrhd0y1fLyOZGo_Y-wlVUP4lkHVgm/view?usp=sharing) and [description document](https://docs.google.com/spreadsheets/d/1lz9liWPy8yHybKCdO3BCA9K76QH8a54XduiZS_9fK70/edit?usp=sharing) here. 
+
+##### To load the data:
+seg:
+import nibabel as nib
+seg = nib.load(file name).get_fdata() # seg is a np array / volume of (512,512,N) with rib labels
+
+cl:
+import numpy as np
+cl = np.load(file name)['cl'] # cl is a np array of (24,500,3), each rib contains 500 points
+
 
 ## Paper ([MICCAI'21](http://arxiv.org/abs/2109.09521)) | Dataset ([Zenodo](https://doi.org/10.5281/zenodo.5336592))
 
