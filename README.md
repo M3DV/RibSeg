@@ -1,6 +1,6 @@
 # RibSeg 
 
-##### RibSeg v2 is coming soon, for code of RibSeg v1, please refer to the branch [ribsegv1](https://github.com/M3DV/RibSeg/tree/ribsegv1).
+##### Please see the RibSeg v2 paper  ([paper](https://arxiv.org/abs/2210.09309)) here, for code of RibSeg v1, please refer to the branch [ribsegv1](https://github.com/M3DV/RibSeg/tree/ribsegv1).
 
 ## Paper ([MICCAI'21](http://arxiv.org/abs/2109.09521)) | Dataset ([Zenodo](https://doi.org/10.5281/zenodo.5336592))
 
