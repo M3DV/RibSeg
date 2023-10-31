@@ -1,6 +1,6 @@
 # RibSeg 
 
-##### Please see the RibSeg v2 [paper](https://arxiv.org/abs/2210.09309) here, for code of RibSeg v1, please refer to the branch [ribsegv1](https://github.com/M3DV/RibSeg/tree/ribsegv1).
+##### Please see the RibSeg v2 [paper](https://arxiv.org/abs/2210.09309) on IEEE TMI 2023, for code of RibSeg v1, please refer to the branch [ribsegv1](https://github.com/M3DV/RibSeg/tree/ribsegv1).
 
 #### Pre-Released! Welcome to use and leave comments! Please cite [RibSeg v2](https://arxiv.org/abs/2210.09309)!
 
@@ -92,11 +92,21 @@ python post_proc.py
 # Citation
 If you find this project useful, please cite our paper as:
 
+    Liang Jin, Shixuan Gu, Donglai Wei, Jason Ken Adhinarta, Kaiming Kuang, Yongjie Jessica Zhang, Hanspeter Pfister, Bingbing Ni, Jiancheng Yang, Ming Li. "RibSeg v2: A Large-scale Benchmark for Rib Labeling and Anatomical Centerline Extraction". IEEE Transactions on Medical Imaging (TMI), 2023.
+    
     Jiancheng Yang, Shixuan Gu, Donglai Wei, Hanspeter Pfister, Bingbing Ni. "RibSeg Dataset and Strong Point Cloud Baselines for Rib Segmentation from CT Scans". International Conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI), 2021.
 
 or using bibtex:
 
-    @inproceedings{yang2021ribseg,
+    @article{ribsegv2,
+      title={RibSeg v2: A Large-scale Benchmark for Rib Labeling and Anatomical Centerline Extraction},
+      author={Jin, Liang and Gu, Shixuan and Wei, Donglai and Adhinarta, Jason Ken and Kuang, Kaiming and Zhang, Yongjie Jessica and Pfister, Hanspeter and Ni, Bingbing and Yang, Jiancheng and Li, Ming},
+      journal={IEEE Transactions on Medical Imaging (TMI)},
+      year={2023},
+      publisher={IEEE}
+    }
+
+    @inproceedings{ribsegv1,
       title={RibSeg Dataset and Strong Point Cloud Baselines for Rib Segmentation from CT Scans},
       author={Yang, Jiancheng and Gu, Shixuan and Wei, Donglai and Pfister, Hanspeter and Ni, Bingbing},
       booktitle={International Conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI)},
