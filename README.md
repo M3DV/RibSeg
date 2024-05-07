@@ -2,9 +2,9 @@
 
 ##### Please see the RibSeg v2 [paper](https://arxiv.org/abs/2210.09309) on IEEE TMI 2023, for code of RibSeg v1, please refer to the branch [ribsegv1](https://github.com/M3DV/RibSeg/tree/ribsegv1).
 
-#### Pre-Released! Welcome to use and leave comments! Please cite [RibSeg v2](https://arxiv.org/abs/2210.09309)!
+#### Released! Welcome to use and leave comments! Please cite [RibSeg v2](https://arxiv.org/abs/2210.09309)!
 
-##### Pre-released RibSeg v2 [dataset](https://drive.google.com/file/d/1ZZGGrhd0y1fLyOZGo_Y-wlVUP4lkHVgm/view?usp=sharing) and [description document](https://docs.google.com/spreadsheets/d/1lz9liWPy8yHybKCdO3BCA9K76QH8a54XduiZS_9fK70/edit?usp=sharing) here. 
+##### RibSeg v2 [dataset](https://drive.google.com/file/d/1ZZGGrhd0y1fLyOZGo_Y-wlVUP4lkHVgm/view?usp=sharing), [description document](https://docs.google.com/spreadsheets/d/1lz9liWPy8yHybKCdO3BCA9K76QH8a54XduiZS_9fK70/edit?usp=sharing), and [annotations as mesh](https://drive.google.com/file/d/1b_qcg99efU8cF2pXshl2ZFxi4LCQOmpw/view?usp=sharing) here. 
 
 ##### To load the data:
 seg:
