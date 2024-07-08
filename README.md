@@ -1,7 +1,7 @@
 # RibSeg 
 
 ##### Please see the RibSeg v2 [paper](https://arxiv.org/abs/2210.09309) on IEEE TMI 2023.
-##### For code of RibSeg v2, please refer to the branch [ribsegv1](https://github.com/M3DV/RibSeg/tree/ribsegv2).
+##### For code of RibSeg v2, please refer to the branch [ribsegv2](https://github.com/M3DV/RibSeg/tree/ribsegv2).
 ##### For code of RibSeg v1, please refer to the branch [ribsegv1](https://github.com/M3DV/RibSeg/tree/ribsegv1).
 
 #### Released! Welcome to use and leave comments! Please cite [RibSeg v2](https://arxiv.org/abs/2210.09309)!
