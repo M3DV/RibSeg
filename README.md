@@ -1,6 +1,22 @@
 # RibSeg 
 
-##### RibSeg v2 is coming soon, for code of RibSeg v1, please refer to the branch [ribsegv1](https://github.com/M3DV/RibSeg/tree/ribsegv1).
+##### Please see the RibSeg v2 [paper](https://arxiv.org/abs/2210.09309) on IEEE TMI 2023.
+##### For code of RibSeg v2, please refer to the branch [ribsegv2](https://github.com/M3DV/RibSeg/tree/ribsegv2).
+##### For code of RibSeg v1, please refer to the branch [ribsegv1](https://github.com/M3DV/RibSeg/tree/ribsegv1).
+
+#### Released! Welcome to use and leave comments! Please cite [RibSeg v2](https://arxiv.org/abs/2210.09309)!
+
+##### RibSeg v2 [dataset](https://drive.google.com/file/d/1ZZGGrhd0y1fLyOZGo_Y-wlVUP4lkHVgm/view?usp=sharing), [description document](https://docs.google.com/spreadsheets/d/1lz9liWPy8yHybKCdO3BCA9K76QH8a54XduiZS_9fK70/edit?usp=sharing), and [annotations as mesh](https://drive.google.com/file/d/1b_qcg99efU8cF2pXshl2ZFxi4LCQOmpw/view?usp=sharing) here. 
+
+##### To load the data:
+seg:
+import nibabel as nib
+seg = nib.load(file name).get_fdata() # seg is a np array / volume of (512,512,N) with rib labels
+
+cl:
+import numpy as np
+cl = np.load(file name)['cl'] # cl is a np array of (24,500,3), each rib contains 500 points
+
 
 ## Paper ([MICCAI'21](http://arxiv.org/abs/2109.09521)) | Dataset ([Zenodo](https://doi.org/10.5281/zenodo.5336592))
 
@@ -78,11 +94,21 @@ python post_proc.py
 # Citation
 If you find this project useful, please cite our paper as:
 
+    Liang Jin, Shixuan Gu, Donglai Wei, Jason Ken Adhinarta, Kaiming Kuang, Yongjie Jessica Zhang, Hanspeter Pfister, Bingbing Ni, Jiancheng Yang, Ming Li. "RibSeg v2: A Large-scale Benchmark for Rib Labeling and Anatomical Centerline Extraction". IEEE Transactions on Medical Imaging (TMI), 2023.
+    
     Jiancheng Yang, Shixuan Gu, Donglai Wei, Hanspeter Pfister, Bingbing Ni. "RibSeg Dataset and Strong Point Cloud Baselines for Rib Segmentation from CT Scans". International Conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI), 2021.
 
 or using bibtex:
 
-    @inproceedings{yang2021ribseg,
+    @article{ribsegv2,
+      title={RibSeg v2: A Large-scale Benchmark for Rib Labeling and Anatomical Centerline Extraction},
+      author={Jin, Liang and Gu, Shixuan and Wei, Donglai and Adhinarta, Jason Ken and Kuang, Kaiming and Zhang, Yongjie Jessica and Pfister, Hanspeter and Ni, Bingbing and Yang, Jiancheng and Li, Ming},
+      journal={IEEE Transactions on Medical Imaging (TMI)},
+      year={2023},
+      publisher={IEEE}
+    }
+
+    @inproceedings{ribsegv1,
       title={RibSeg Dataset and Strong Point Cloud Baselines for Rib Segmentation from CT Scans},
       author={Yang, Jiancheng and Gu, Shixuan and Wei, Donglai and Pfister, Hanspeter and Ni, Bingbing},
       booktitle={International Conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI)},
